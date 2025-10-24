@@ -1,0 +1,18 @@
+<template>
+  <lightning-card title="Child Component" icon-name="custom:custom14">
+    <div class="slds-p-around_medium">
+      <lightning-input
+        label="Enter Name"
+        value={userInput}
+        onchange={handleChange}
+        class="slds-m-bottom_medium"
+      ></lightning-input>
+
+      <lightning-button
+        label="Send to Parent"
+        variant="brand"
+        onclick={sendData}
+      ></lightning-button>
+    </div>
+  </lightning-card>
+</template>

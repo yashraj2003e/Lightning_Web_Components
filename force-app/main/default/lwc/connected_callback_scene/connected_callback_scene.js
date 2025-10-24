@@ -1,4 +1,4 @@
-import { track, LightningElement } from "lwc";
+import { LightningElement } from "lwc";
 
 import getAccount from "@salesforce/apex/getAccounts.getAccount";
 
@@ -6,14 +6,17 @@ import getAccount from "@salesforce/apex/getAccounts.getAccount";
 // TODO - Figure out scenarios to use ConnectedCallback and RenderedCallback 
 //? and implement them
 
-// !ConnectedCallback - when components inserted in DOM
+// !ConnectedCallback - when component inserted in DOM, initial stage nothing is rendered 
 // !RenderedCallback - UI renders everytime when data changes, (TEMPLATE CHANGE !!!)
 **/
 
 export default class Connected_callback_scene extends LightningElement {
-  @track data;
+  data;
   error;
-  @track size;
+  size;
+
+  titleUpdated = false;
+  message = "hi";
 
   connectedCallback() {
     document.title = "Loading...";
@@ -28,9 +31,25 @@ export default class Connected_callback_scene extends LightningElement {
         this.error = error;
         console.log(error);
       });
+
+    /**  //! ERROR
+    const m = this.template.querySelector(".msg");
+    console.log(m);
+    m.innerText = "good bye";
+    **/
   }
 
   renderedCallback() {
-    console.log(document.title);
+    if (this.data && !this.titleUpdated) {
+      document.title = `Accounts Loaded (${this.size})`;
+      console.log("title updated!");
+      this.titleUpdated = true;
+    }
+
+    const m = this.template.querySelector(".msg");
+    console.log(m);
+    if (m) {
+      m.innerText = "good bye";
+    }
   }
 }
