@@ -1,0 +1,23 @@
+<template>
+  <h1>PLAY A QUIZ !</h1>
+  <template for:each={questions} for:item="q" for:index="qIndex">
+    <div key={q.id}>
+      <p>{q.question}</p>
+      <template for:each={q.choices} for:item="choice" for:index="cIndex">
+        <div
+          key={choice.ch}
+          data-qindex={qIndex}
+          data-cindex={cIndex}
+          onclick={handleClick}
+        >
+          <input type="checkbox" checked={choice.checked} />
+          <p>{choice.ch}</p>
+        </div>
+      </template>
+    </div>
+  </template>
+  <div>
+    <button onclick={calculateScore}>Get Score</button>
+    <p>Your score is - {totalScore}</p>
+  </div>
+</template>
