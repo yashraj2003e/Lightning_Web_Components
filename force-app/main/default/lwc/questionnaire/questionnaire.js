@@ -39,6 +39,7 @@ export default class Questionnaire extends LightningElement {
 
     this.userAnswer[qIndex] = this.userAnswer[qIndex] === cIndex ? -1 : cIndex;
 
+    //! Use when not using @track, as nested components being modified reassigning is more reliable for re-render !!
     // this.questions = [...this.questions];
   }
 
